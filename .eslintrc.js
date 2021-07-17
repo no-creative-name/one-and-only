@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'plugin:import/typescript',
     'airbnb',
   ],
   parser: '@typescript-eslint/parser',
@@ -18,6 +19,8 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
+    '@emotion',
+    'import',
   ],
   rules: {
     'react/jsx-uses-react': 'off',
@@ -25,5 +28,11 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'import/extensions': 'off',
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
   },
 };

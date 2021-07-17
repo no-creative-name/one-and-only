@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { App } from './app';
+import './reset.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>Hello</div>
+    <App />
   </React.StrictMode>,
   document.getElementById('root'),
 );
