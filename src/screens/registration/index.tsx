@@ -8,7 +8,6 @@ import {
 } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { Layout } from '../../components';
 import { Routes } from '../../constants';
 
 const RegistrationSchema = Yup.object().shape({
@@ -48,53 +47,51 @@ export const RegistrationScreen: React.FC = () => {
   });
 
   return (
-    <Layout>
-      <Grid
-        item
-        xs={6}
-      >
-        <Typography variant="h2" component="h1">Registration</Typography>
-        <form onSubmit={form.handleSubmit}>
-          <Box display="flex" flexDirection="column">
-            <TextField
-              name="email"
-              label="E-mail"
-              value={form.values.email}
-              onChange={form.handleChange}
-              error={form.touched.email && Boolean(form.errors.email)}
-              helperText={form.touched.email && form.errors.email}
-            />
-            <TextField
-              name="firstName"
-              label="First Name"
-              value={form.values.firstName}
-              onChange={form.handleChange}
-              error={form.touched.firstName && Boolean(form.errors.firstName)}
-              helperText={form.touched.firstName && form.errors.firstName}
-            />
-            <TextField
-              name="password"
-              type="password"
-              label="Password"
-              value={form.values.password}
-              onChange={form.handleChange}
-              error={form.touched.password && Boolean(form.errors.password)}
-              helperText={form.touched.password && form.errors.password}
-            />
-            <TextField
-              name="passwordConfirm"
-              type="password"
-              label="Password confirm"
-              value={form.values.passwordConfirm}
-              onChange={form.handleChange}
-              error={form.touched.passwordConfirm && Boolean(form.errors.passwordConfirm)}
-              helperText={form.touched.passwordConfirm && form.errors.passwordConfirm}
-            />
-            <Button color="primary" type="submit">Register</Button>
-          </Box>
-        </form>
-      </Grid>
-    </Layout>
+    <Grid
+      item
+      xs={6}
+    >
+      <Typography variant="h2" component="h1">Registration</Typography>
+      <form onSubmit={form.handleSubmit}>
+        <Box display="flex" flexDirection="column">
+          <TextField
+            name="email"
+            label="E-mail"
+            value={form.values.email}
+            onChange={form.handleChange}
+            error={form.touched.email && Boolean(form.errors.email)}
+            helperText={form.touched.email && form.errors.email}
+          />
+          <TextField
+            name="firstName"
+            label="First Name"
+            value={form.values.firstName}
+            onChange={form.handleChange}
+            error={form.touched.firstName && Boolean(form.errors.firstName)}
+            helperText={form.touched.firstName && form.errors.firstName}
+          />
+          <TextField
+            name="password"
+            type="password"
+            label="Password"
+            value={form.values.password}
+            onChange={form.handleChange}
+            error={form.touched.password && Boolean(form.errors.password)}
+            helperText={form.touched.password && form.errors.password}
+          />
+          <TextField
+            name="passwordConfirm"
+            type="password"
+            label="Password confirm"
+            value={form.values.passwordConfirm}
+            onChange={form.handleChange}
+            error={form.touched.passwordConfirm && Boolean(form.errors.passwordConfirm)}
+            helperText={form.touched.passwordConfirm && form.errors.passwordConfirm}
+          />
+          <Button color="primary" type="submit">Register</Button>
+        </Box>
+      </form>
+    </Grid>
   );
 };
 

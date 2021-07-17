@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import Amplify from 'aws-amplify';
 import { useEffect } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
@@ -7,22 +6,18 @@ import { RegistrationScreen } from './screens/registration';
 import { WelcomeScreen } from './screens/welcome';
 import awsConfig from './aws-exports';
 import { AccountConfirmationScreen } from './screens/account-confirmation';
-
-const AppContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { LoginScreen } from './screens/login';
+import { Layout } from './components';
+import { useCheckIfLoggedIn } from './hooks';
 
 export const App = () => {
+  useCheckIfLoggedIn();
   useEffect(() => {
     Amplify.configure(awsConfig);
   }, []);
 
   return (
-    <AppContainer>
+    <Layout>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route
@@ -34,12 +29,16 @@ export const App = () => {
             component={AccountConfirmationScreen}
           />
           <Route
+            path={Routes.Login}
+            component={LoginScreen}
+          />
+          <Route
             path={Routes.Welcome}
             component={WelcomeScreen}
           />
         </Switch>
       </BrowserRouter>
-    </AppContainer>
+    </Layout>
   );
 };
 

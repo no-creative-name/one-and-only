@@ -1,6 +1,5 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { Auth } from 'aws-amplify';
 import {
   Box,
   Button,
@@ -9,29 +8,31 @@ import {
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { Routes } from '../../constants';
+import { useLogin } from '../../hooks/use-login';
 
-const AccountConfirmationSchema = Yup.object().shape({
-  email: Yup.string().required(),
-  code: Yup.string().length(6).required(),
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email().required(),
+  password: Yup.string().required(),
 });
 
-export const AccountConfirmationScreen: React.FC = () => {
+export const LoginScreen: React.FC = () => {
+  const login = useLogin();
   const history = useHistory();
 
   const form = useFormik({
     validateOnMount: true,
     initialValues: {
       email: '',
-      code: '',
+      password: '',
     },
-    validationSchema: AccountConfirmationSchema,
+    validationSchema: LoginSchema,
     onSubmit: async ({
       email,
-      code,
+      password,
     }) => {
       try {
-        await Auth.confirmSignUp(email, code);
-        history.push(Routes.Login);
+        await login(email, password);
+        history.push(Routes.Welcome);
       } catch (e) {
         console.error(e);
       }
@@ -43,7 +44,7 @@ export const AccountConfirmationScreen: React.FC = () => {
       item
       xs={6}
     >
-      <Typography variant="h2" component="h1">Confirm your account</Typography>
+      <Typography variant="h2" component="h1">Login</Typography>
       <form onSubmit={form.handleSubmit}>
         <Box display="flex" flexDirection="column">
           <TextField
@@ -55,18 +56,19 @@ export const AccountConfirmationScreen: React.FC = () => {
             helperText={form.touched.email && form.errors.email}
           />
           <TextField
-            name="code"
-            label="Confirmation code"
-            value={form.values.code}
+            name="password"
+            type="password"
+            label="Password"
+            value={form.values.password}
             onChange={form.handleChange}
-            error={form.touched.code && Boolean(form.errors.code)}
-            helperText={form.touched.code && form.errors.code}
+            error={form.touched.password && Boolean(form.errors.password)}
+            helperText={form.touched.password && form.errors.password}
           />
-          <Button color="primary" type="submit">Confirm account</Button>
+          <Button color="primary" type="submit">Login</Button>
         </Box>
       </form>
     </Grid>
   );
 };
 
-export default AccountConfirmationScreen;
+export default LoginScreen;
