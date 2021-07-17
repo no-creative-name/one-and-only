@@ -192,6 +192,11 @@ Resources:
           Name: email
           Required: true
           Mutable: true
+        -
+          Name: custom:first_name
+          Required: false
+          Mutable: true
+          AttributeDataType: String
         
       
       

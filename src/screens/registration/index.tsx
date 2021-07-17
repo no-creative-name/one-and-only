@@ -1,0 +1,101 @@
+import React from 'react';
+import * as Yup from 'yup';
+import { Auth } from 'aws-amplify';
+import {
+  Box,
+  Button,
+  Grid, TextField, Typography,
+} from '@material-ui/core';
+import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
+import { Layout } from '../../components';
+import { Routes } from '../../constants';
+
+const RegistrationSchema = Yup.object().shape({
+  email: Yup.string().email().required(),
+  firstName: Yup.string().required(),
+  password: Yup.string().required(),
+  passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null]).required(),
+});
+
+export const RegistrationScreen: React.FC = () => {
+  const history = useHistory();
+
+  const form = useFormik({
+    validateOnMount: true,
+    initialValues: {
+      email: '',
+      firstName: '',
+      password: '',
+      passwordConfirm: '',
+    },
+    validationSchema: RegistrationSchema,
+    onSubmit: async (values) => {
+      try {
+        await Auth.signUp({
+          username: values.email,
+          password: values.password,
+          attributes: {
+            email: values.email,
+            'custom:first_name': values.firstName,
+          },
+        });
+        history.push(Routes.AccountConfirmation);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  });
+
+  return (
+    <Layout>
+      <Grid
+        item
+        xs={6}
+      >
+        <Typography variant="h2" component="h1">Registration</Typography>
+        <form onSubmit={form.handleSubmit}>
+          <Box display="flex" flexDirection="column">
+            <TextField
+              name="email"
+              label="E-mail"
+              value={form.values.email}
+              onChange={form.handleChange}
+              error={form.touched.email && Boolean(form.errors.email)}
+              helperText={form.touched.email && form.errors.email}
+            />
+            <TextField
+              name="firstName"
+              label="First Name"
+              value={form.values.firstName}
+              onChange={form.handleChange}
+              error={form.touched.firstName && Boolean(form.errors.firstName)}
+              helperText={form.touched.firstName && form.errors.firstName}
+            />
+            <TextField
+              name="password"
+              type="password"
+              label="Password"
+              value={form.values.password}
+              onChange={form.handleChange}
+              error={form.touched.password && Boolean(form.errors.password)}
+              helperText={form.touched.password && form.errors.password}
+            />
+            <TextField
+              name="passwordConfirm"
+              type="password"
+              label="Password confirm"
+              value={form.values.passwordConfirm}
+              onChange={form.handleChange}
+              error={form.touched.passwordConfirm && Boolean(form.errors.passwordConfirm)}
+              helperText={form.touched.passwordConfirm && form.errors.passwordConfirm}
+            />
+            <Button color="primary" type="submit">Register</Button>
+          </Box>
+        </form>
+      </Grid>
+    </Layout>
+  );
+};
+
+export default RegistrationScreen;
