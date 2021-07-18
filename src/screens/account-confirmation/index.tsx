@@ -41,7 +41,8 @@ export const AccountConfirmationScreen: React.FC = () => {
   return (
     <Grid
       item
-      xs={6}
+      xs={9}
+      md={6}
     >
       <Typography variant="h2" component="h1">Confirm your account</Typography>
       <form onSubmit={form.handleSubmit}>

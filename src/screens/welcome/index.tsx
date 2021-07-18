@@ -8,9 +8,10 @@ export const WelcomeScreen = () => {
   return (
     <Grid
       item
-      xs={6}
+      xs={9}
+      md={6}
     >
-      <Typography variant="h1">One and only</Typography>
+      <Typography variant="h1">One & Only</Typography>
       <Button onClick={() => {
         history.push(Routes.Registration);
       }}

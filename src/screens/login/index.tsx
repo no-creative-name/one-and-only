@@ -42,7 +42,8 @@ export const LoginScreen: React.FC = () => {
   return (
     <Grid
       item
-      xs={6}
+      xs={9}
+      md={6}
     >
       <Typography variant="h2" component="h1">Login</Typography>
       <form onSubmit={form.handleSubmit}>

@@ -46,7 +46,8 @@ export const RegistrationScreen: React.FC = () => {
   return (
     <Grid
       item
-      xs={6}
+      xs={9}
+      md={6}
     >
       <Typography variant="h2" component="h1">Registration</Typography>
       <form onSubmit={form.handleSubmit}>

@@ -10,10 +10,24 @@ const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  background-color: grey;
+  background-color: var(--cl-primary);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
+const Logo = styled.span`
+  color: var(--cl-white);
+  font-size: 50px;
+  cursor: pointer;
+`;
+
+const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  height: 70px;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const Header = () => {
@@ -22,14 +36,25 @@ export const Header = () => {
 
   return (
     <HeaderContainer>
-      {state.isAuthenticated ? <LogoutButton /> : null}
-      {state.isAuthenticated ? (
-        <Button
-          onClick={() => history.push(Routes.Profile)}
-        >
-          Profile
-        </Button>
-      ) : null}
+      <Logo onClick={() => {
+        history.push(Routes.Welcome);
+      }}
+      >
+        O&O
+
+      </Logo>
+      <ButtonContainer>
+        {state.isAuthenticated ? <LogoutButton /> : null}
+        {state.isAuthenticated ? (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => history.push(Routes.Profile)}
+          >
+            Profile
+          </Button>
+        ) : null}
+      </ButtonContainer>
     </HeaderContainer>
   );
 };

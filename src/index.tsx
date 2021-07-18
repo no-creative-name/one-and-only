@@ -5,6 +5,7 @@ import { App } from './app';
 import { AuthStateProvider } from './context/auth';
 import { initialAuthState } from './context/auth/state';
 import './reset.css';
+import './variables.css';
 import './base.css';
 import awsConfig from './aws-exports';
 
