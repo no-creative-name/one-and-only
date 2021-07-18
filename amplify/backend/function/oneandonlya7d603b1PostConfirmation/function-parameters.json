@@ -1,0 +1,16 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "oneandonlya7d603b1",
+  "functionName": "oneandonlya7d603b1PostConfirmation",
+  "resourceName": "oneandonlya7d603b1PostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/Users/kai.wissler/.nvm/versions/node/v12.18.3/lib/node_modules/@aws-amplify/cli/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "roleName": "oneandonlya7d603b1PostConfirmation",
+  "skipEdit": true,
+  "enableCors": false
+}

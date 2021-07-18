@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "oneandonlya7d603b1": {}
+      },
+      "function": {
+        "oneandonlya7d603b1PostConfirmation": {}
       }
     }
   }

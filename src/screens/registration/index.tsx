@@ -12,7 +12,6 @@ import { Routes } from '../../constants';
 
 const RegistrationSchema = Yup.object().shape({
   email: Yup.string().email().required(),
-  firstName: Yup.string().required(),
   password: Yup.string().required(),
   passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null]).required(),
 });
@@ -24,7 +23,6 @@ export const RegistrationScreen: React.FC = () => {
     validateOnMount: true,
     initialValues: {
       email: '',
-      firstName: '',
       password: '',
       passwordConfirm: '',
     },
@@ -36,7 +34,6 @@ export const RegistrationScreen: React.FC = () => {
           password: values.password,
           attributes: {
             email: values.email,
-            'custom:first_name': values.firstName,
           },
         });
         history.push(Routes.AccountConfirmation);
@@ -61,14 +58,6 @@ export const RegistrationScreen: React.FC = () => {
             onChange={form.handleChange}
             error={form.touched.email && Boolean(form.errors.email)}
             helperText={form.touched.email && form.errors.email}
-          />
-          <TextField
-            name="firstName"
-            label="First Name"
-            value={form.values.firstName}
-            onChange={form.handleChange}
-            error={form.touched.firstName && Boolean(form.errors.firstName)}
-            helperText={form.touched.firstName && form.errors.firstName}
           />
           <TextField
             name="password"
