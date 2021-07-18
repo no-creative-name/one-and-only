@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+
+body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+b {
+  font-weight: 600;
+}
+
+p {
+  margin-top: 30px;
+}

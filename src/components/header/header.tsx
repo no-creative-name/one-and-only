@@ -1,4 +1,7 @@
 import styled from '@emotion/styled';
+import { Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import { Routes } from '../../constants';
 import { useAuthState } from '../../context/auth';
 import { LogoutButton } from '../logout-button/logout-button';
 
@@ -15,10 +18,18 @@ const HeaderContainer = styled.div`
 
 export const Header = () => {
   const { state } = useAuthState();
+  const history = useHistory();
 
   return (
     <HeaderContainer>
       {state.isAuthenticated ? <LogoutButton /> : null}
+      {state.isAuthenticated ? (
+        <Button
+          onClick={() => history.push(Routes.Profile)}
+        >
+          Profile
+        </Button>
+      ) : null}
     </HeaderContainer>
   );
 };
